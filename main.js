@@ -26,6 +26,7 @@ const button = document.querySelector("button");
 const swReg = await navigator.serviceWorker.register(
   "/firebase-messaging-sw.js"
 );
+console.log(swReg);
 
 async function handleClick() {
   let permission = await Notification.requestPermission();
