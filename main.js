@@ -1,11 +1,11 @@
-import { initializeApp } from "firebase/app"
-import { getMessaging, getToken } from 'firebase/messaging';
-import './style.css'
+import { initializeApp } from "firebase/app";
+import { getMessaging, getToken } from "firebase/messaging";
+import "./style.css";
 
 document.querySelector("#app").innerHTML = `
-    <button>SUBSCRIBE</button>
-    <p class="permission"></p>
-    <p class="token"></p>
+  <button>SUBSCRIBE</button>
+  <p class="permission"></p>
+  <p class="token"></p>
 `;
 
 const firebaseConfig = {
@@ -21,12 +21,14 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const messaging = getMessaging(app);
 
-const button = document.querySelector("button")
+const button = document.querySelector("button");
+
+const swReg = await navigator.serviceWorker.register(
+  "/firebase-messaging-sw.js"
+);
 
 async function handleClick() {
-  console.log("clicked");
   let permission = await Notification.requestPermission();
-  console.log(permission);
   if (permission === "granted") {
     document.querySelector(".permission").innerHTML = "Permission granted.";
     let token = await getToken(messaging, {
