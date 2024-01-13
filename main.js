@@ -24,7 +24,7 @@ const messaging = getMessaging(app);
 const button = document.querySelector("button");
 
 const swReg = navigator.serviceWorker
-  .register("./firebase-messaging-sw.js")
+  .register("/sw.js")
   .then((result) => console.log(result));
 
 async function handleClick() {
