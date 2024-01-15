@@ -32,11 +32,15 @@ async function handleClick() {
   let permission = await Notification.requestPermission();
   if (permission === "granted") {
     document.querySelector(".permission").innerHTML = "Permission granted.";
-    let token = await getToken(messaging, {
-      vapidKey:
-        "BB_UyAD-r2mmFBATNx_5D9yIDwq4QFcRxxah3eDky7270f2ZrW62XBBZ_Es_ma4idues55uzNN4G-tzjbNjsnuQ",
-    });
-    if (token) document.querySelector(".token").innerHTML = token;
+    try {
+      let token = await getToken(messaging, {
+        vapidKey:
+          "BB_UyAD-r2mmFBATNx_5D9yIDwq4QFcRxxah3eDky7270f2ZrW62XBBZ_Es_ma4idues55uzNN4G-tzjbNjsnuQ",
+      });
+      document.querySelector(".token").innerHTML = token;
+    } catch(error) {
+      console.log(error);
+    }
   } else {
     document.querySelector("p").innerHTML =
       "Something is wrong with the permission.";
